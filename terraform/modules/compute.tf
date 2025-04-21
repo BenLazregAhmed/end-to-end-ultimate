@@ -1,8 +1,18 @@
+resource "tls_private_key" "ssh_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "aws_key_pair" "deployer" {
+  key_name   = "deployer-key"
+  public_key = tls_private_key.ssh_key.public_key_openssh
+}
 
 resource "aws_instance" "main_server" {
   ami             = var.ami # Ubuntu 20.04 LTS // us-east-1
   instance_type   = var.instance_type
   security_groups = [aws_security_group.instances.name]
+  key_name = "deployer-key"
   user_data       = <<-EOF
               #!/bin/bash
               sudo apt-get update

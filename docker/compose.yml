@@ -1,0 +1,5 @@
+services:
+  end-to-end-spring:
+    image: ahmedevops/end-to-end-spring:latest
+    ports:
+      - "8080:8080"

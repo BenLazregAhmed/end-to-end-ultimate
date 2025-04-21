@@ -36,6 +36,16 @@
 #      - name: Terraform Apply
 #        id: apply
 #        run: terraform apply -auto-approve -no-color
+#      - name: Store SSH key as GitHub secret
+#        env:
+#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          gh secret set EC2_SSH_PRIVATE_KEY -b"$(<private_key.pem)"
+#      - name: Store ec2 ip addr as GitHub secret
+#        env:
+#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          gh secret set EC2_HOST -b"$(<private_key.pem)"
 #  test:
 #
 #    runs-on: ubuntu-latest
@@ -53,7 +63,7 @@
 #  build:
 #
 #    runs-on: ubuntu-latest
-#
+#    needs: test
 #    steps:
 #      - uses: actions/checkout@v4
 #      - name: Set up JDK 21
@@ -72,3 +82,29 @@
 #      - run: docker image build -t ahmedevops/end-to-end-spring:latest .
 #
 #      - run: docker image push ahmedevops/end-to-end-spring:latest
+#  deploy:
+#    runs-on: ubuntu-latest
+#    needs:
+#      - terraform
+#      - build
+#    steps:
+#      - name: Download SSH key artifact
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: ssh-key
+#
+#      - name: Set up SSH
+#        run: |
+#          mkdir -p ~/.ssh
+#          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+#          chmod 600 ~/.ssh/id_rsa
+#          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+#
+#      - name: Deploy using SSH and Docker Compose
+#        run: |
+#          ssh ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+#            cd /home/ubuntu/my-app
+#            git clone https://github.com/BenLazregAhmed/end-to-end-ultimate.git
+#            cd /docker
+#            docker compose up -d
+#          EOF
