@@ -36,6 +36,13 @@ jobs:
 
       - name: Authenticate gh CLI
         run: echo "${{ secrets.GH_PAT }}" | gh auth login --with-token
+      - name: Show EC2 Private Key and Public IP
+        run: |
+          echo "🔐 EC2 Private Key:"
+          terraform output -raw private_key
+          echo "🌐 EC2 Public IP:"
+          terraform output -raw instance_public_ip
+
       - name: Store SSH key as GitHub secret
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
