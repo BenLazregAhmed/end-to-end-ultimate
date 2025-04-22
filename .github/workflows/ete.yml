@@ -43,7 +43,7 @@ jobs:
           terraform output -raw private_key | gh secret set EC2_SSH_PRIVATE_KEY
       - name: Store ec2 ip addr as GitHub secret
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT}}
         run: |
           terraform output -raw instance_public_ip | gh secret set EC2_HOST
 
