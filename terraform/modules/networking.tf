@@ -26,7 +26,7 @@ resource "aws_security_group_rule" "allow_ssh_inbound" {
   cidr_blocks = ["0.0.0.0/0"]
 }
 
-resource "aws_security_group_rule" "allow_ssh_inbound" {
+resource "aws_security_group_rule" "allow_ssh_outbound" {
   type              = "egress"
   security_group_id = aws_security_group.instances.id
 
