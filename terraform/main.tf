@@ -3,7 +3,7 @@ terraform {
 
   required_providers {
     aws = {
-      source = "hashicorp/aws" # Specify the source of the AWS provider
+      source  = "hashicorp/aws" # Specify the source of the AWS provider
       version = "~> 4.0"        # Use a version of the AWS provider that is compatible with version
     }
   }
@@ -16,6 +16,6 @@ provider "aws" {
 module "app_server" {
   source = "./modules"
 
-  ami = "ami-011899242bb902164"
+  ami           = "ami-011899242bb902164"
   instance_type = "t3.micro"
 }

@@ -12,7 +12,7 @@ resource "aws_instance" "main_server" {
   ami             = var.ami # Ubuntu 20.04 LTS // us-east-1
   instance_type   = var.instance_type
   security_groups = [aws_security_group.instances.name]
-  key_name = "deployer-key"
+  key_name        = "deployer-key"
   user_data       = <<-EOF
               #!/bin/bash
               sudo apt-get update
