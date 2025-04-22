@@ -115,6 +115,7 @@ jobs:
             cd /end-to-end-ultimate
             ls
             sudo git pull
+            pwd
             cd /docker
             docker compose down
             docker compose up -d
