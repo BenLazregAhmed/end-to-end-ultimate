@@ -17,5 +17,5 @@ terraform {
 }
 
 provider "aws" {
-  region = var.region # Set the AWS region to US East (N. Virginia)
+  region = "us-east-1" # Set the AWS region to US East (N. Virginia)
 }
