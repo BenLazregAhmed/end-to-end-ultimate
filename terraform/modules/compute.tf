@@ -13,6 +13,7 @@ resource "aws_instance" "main_server" {
   instance_type   = var.instance_type
   security_groups = [aws_security_group.instances.name]
   key_name        = "deployer-key"
+  depends_on = [aws_key_pair.deployer]
   user_data       = <<-EOF
               #!/bin/bash
               sudo apt-get update
@@ -28,7 +29,6 @@ resource "aws_instance" "main_server" {
               sudo usermod -aG docker ubuntu
               sudo systemctl enable docker
               sudo systemctl start docker
-              docker run nginx -p 80:80
               git clone https://github.com/BenLazregAhmed/end-to-end-ultimate.git
               cd /end-to-end-ultimate
               EOF
