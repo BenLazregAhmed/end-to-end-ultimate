@@ -16,8 +16,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: location
-        run: ls
+      - name: working dir
+        run: cd /terraform
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
