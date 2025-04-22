@@ -1,4 +1,14 @@
 terraform {
+
+  cloud {
+
+    organization = "ISIMM-TEST"
+
+    workspaces {
+      name = "end-to-end-spring"
+    }
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
