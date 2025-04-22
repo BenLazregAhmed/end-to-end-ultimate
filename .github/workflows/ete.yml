@@ -89,28 +89,29 @@ jobs:
       - run: docker image build -t ahmedevops/end-to-end-spring:latest .
 
       - run: docker image push ahmedevops/end-to-end-spring:latest
-#  deploy:
-#    runs-on: ubuntu-latest
-#    needs:
-#      - terraform
-#      - build
-#    steps:
-#      - name: Download SSH key artifact
-#        uses: actions/download-artifact@v3
-#        with:
-#          name: ssh-key
-#
-#      - name: Set up SSH
-#        run: |
-#          mkdir -p ~/.ssh
-#          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-#          chmod 600 ~/.ssh/id_rsa
-#          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-#
-#      - name: Deploy using SSH and Docker Compose
-#        run: |
-#          ssh ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-#            git pull
-#            cd /docker
-#            docker compose up -d
-#          EOF
+  deploy:
+    name: "deploying on aws"
+    runs-on: ubuntu-latest
+    needs:
+      - terraform
+      - docker
+    steps:
+      - name: Download SSH key artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ssh-key
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy using SSH and Docker Compose
+        run: |
+          ssh ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+            git pull
+            cd /end-to-end-ultimate/docker
+            docker compose up -d
+          EOF
