@@ -28,5 +28,7 @@ resource "aws_instance" "main_server" {
               sudo usermod -aG docker ubuntu
               sudo systemctl enable docker
               sudo systemctl start docker
+              git clone https://github.com/BenLazregAhmed/end-to-end-ultimate.git
+              cd /end-to-end-ultimate
               EOF
 }

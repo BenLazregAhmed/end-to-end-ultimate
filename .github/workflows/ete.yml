@@ -1,51 +1,51 @@
-#on:
-#  push:
-#    branches:
-#      - main
-#jobs:
-#  terraform:
-#    name: "Terraform"
-#    runs-on: ubuntu-latest
-#    env:
-#      TF_TOKEN_app_terraform_io : ${{ secrets.TF_API_TOKEN }}
-#    defaults:
-#      run:
-#        working-directory: /terraform
-#
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v2
-#
-#      - name: Setup Terraform
-#        uses: hashicorp/setup-terraform@v1
-#        with:
-#          terraform_version: 1.11.4
-#          terraform_wrapper: false
-#
-#      - name: Terraform Format
-#        id: fmt
-#        run: terraform fmt -check
-#
-#      - name: Terraform Init
-#        id: init
-#        run: terraform init
-#
-#      - name: Terraform Plan
-#        id: plan
-#        run: terraform plan
-#      - name: Terraform Apply
-#        id: apply
-#        run: terraform apply -auto-approve -no-color
-#      - name: Store SSH key as GitHub secret
-#        env:
-#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          gh secret set EC2_SSH_PRIVATE_KEY -b"$(<private_key.pem)"
-#      - name: Store ec2 ip addr as GitHub secret
-#        env:
-#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          gh secret set EC2_HOST -b"$(<private_key.pem)"
+on:
+  push:
+    branches:
+      - main
+jobs:
+  terraform:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    env:
+      TF_TOKEN_app_terraform_io : ${{ secrets.TF_API_TOKEN }}
+    defaults:
+      run:
+        working-directory: /terraform
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.11.4
+          terraform_wrapper: false
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve -no-color
+      - name: Store SSH key as GitHub secret
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh secret set EC2_SSH_PRIVATE_KEY -b"$(<private_key.pem)"
+      - name: Store ec2 ip addr as GitHub secret
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh secret set EC2_HOST -b"$(<private_key.pem)"
 #  test:
 #
 #    runs-on: ubuntu-latest
@@ -103,8 +103,7 @@
 #      - name: Deploy using SSH and Docker Compose
 #        run: |
 #          ssh ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-#            cd /home/ubuntu/my-app
-#            git clone https://github.com/BenLazregAhmed/end-to-end-ultimate.git
+#            git pull
 #            cd /docker
 #            docker compose up -d
 #          EOF
