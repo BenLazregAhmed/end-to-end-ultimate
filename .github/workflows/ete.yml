@@ -98,7 +98,13 @@ jobs:
     env:
       PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
       HOST: ${{ secrets.EC2_HOST }}
+
     steps:
+      - name: Debug EC2 host
+        run: |
+          echo "HOST='$HOST'"
+          echo "Length: ${#HOST}"
+
       - name: Deploy to EC2
         run: |
           echo "$PRIVATE_KEY" > github-ec2.pem && chmod 600 github-ec2.pem
