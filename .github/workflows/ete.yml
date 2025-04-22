@@ -43,12 +43,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh secret set EC2_SSH_PRIVATE_KEY -b"$(<private_key.pem)"
+          terraform output -raw private_key | gh secret set EC2_SSH_PRIVATE_KEY
       - name: Store ec2 ip addr as GitHub secret
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh secret set EC2_HOST -b"$(<private_key.pem)"
+          terraform output -raw instance_public_ip | gh secret set EC2_HOST
+
 #  test:
 #
 #    runs-on: ubuntu-latest
