@@ -96,10 +96,6 @@ jobs:
       - terraform
       - docker
     steps:
-      - name: Download SSH key artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: ssh-key
 
       - name: Set up SSH
         run: |
