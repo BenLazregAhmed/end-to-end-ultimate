@@ -96,7 +96,7 @@ jobs:
       - terraform
       - docker
     env:
-      PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
+      PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
       HOST: ${{ secrets.EC2_HOST }}
     steps:
       - name: Deploy to EC2
