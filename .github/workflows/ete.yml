@@ -116,22 +116,6 @@ jobs:
             ls
             sudo git pull
             pwd
-#            cd /docker
             docker compose down
             docker compose up -d
           EOF
-
-#      - name: Set up SSH
-#        run: |
-#          mkdir -p ~/.ssh
-#          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-#          chmod 600 ~/.ssh/id_rsa
-#          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-#
-#      - name: Deploy using SSH and Docker Compose
-#        run: |
-#          ssh ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-#            git pull
-#            cd /end-to-end-ultimate/docker
-#            docker compose up -d
-#          EOF
