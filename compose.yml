@@ -11,14 +11,14 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - "/home/ubuntu/docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "/home/ubuntu/end-to-end-ultimate/docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
     ## Tempo
   my-tempo:
     image: grafana/tempo
     container_name: my-tempo
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
-        - /home/ubuntu/docker/tempo/tempo.yml:/etc/tempo.yaml:ro
+        - /home/ubuntu/end-to-end-ultimate/docker/tempo/tempo.yml:/etc/tempo.yaml:ro
       #      - /home/ubuntu/docker/tempo/tempo-data:/tmp/tempo:rw
     ports:
       - "3200:3200" # Tempo
@@ -37,7 +37,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - /home/ubuntu/docker/grafana:/etc/grafana/provisioning/datasources:ro
+      - /home/ubuntu/end-to-end-ultimate/docker/grafana:/etc/grafana/provisioning/datasources:ro
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=password
