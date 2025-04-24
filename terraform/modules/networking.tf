@@ -16,6 +16,16 @@ resource "aws_security_group_rule" "allow_http_inbound_port_8080" {
   cidr_blocks = ["0.0.0.0/0"]
 }
 
+resource "aws_security_group_rule" "allow_http_inbound_port_3000" {
+  type              = "ingress"
+  security_group_id = aws_security_group.instances.id
+
+  from_port   = 3000
+  to_port     = 3000
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+}
+
 resource "aws_security_group_rule" "allow_http_inbound_port_80" {
   type              = "ingress"
   security_group_id = aws_security_group.instances.id
