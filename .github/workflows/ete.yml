@@ -103,9 +103,9 @@ jobs:
       HOST: ${{ secrets.EC2_HOST }}
 
     steps:
-      - name: waiting for EC2 instance
-        run: |
-          sleep 300
+#      - name: waiting for EC2 instance
+#        run: |
+#          sleep 500
 
       - name: Deploy to EC2
         run: |
