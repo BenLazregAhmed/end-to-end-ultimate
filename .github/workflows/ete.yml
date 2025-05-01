@@ -103,10 +103,9 @@ jobs:
       HOST: ${{ secrets.EC2_HOST }}
 
     steps:
-      - name: Debug EC2 host
+      - name: waiting for EC2 instance
         run: |
-          echo "HOST='$HOST'"
-          echo "Length: ${#HOST}"
+          sleep 300
 
       - name: Deploy to EC2
         run: |
