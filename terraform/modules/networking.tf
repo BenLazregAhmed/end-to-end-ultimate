@@ -6,12 +6,12 @@ resource "aws_security_group" "instances" {
   name = "instance-security-group"
 }
 
-resource "aws_security_group_rule" "allow_http_inbound_port_8080" {
+resource "aws_security_group_rule" "allow_http_inbound_ports_8080_to_10000" {
   type              = "ingress"
   security_group_id = aws_security_group.instances.id
 
   from_port   = 8080
-  to_port     = 8080
+  to_port     = 10000
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
