@@ -3,7 +3,7 @@ services:
     container_name: end-to-end-spring
     image: ahmedevops/end-to-end-spring:latest
     ports:
-      - "80:80"
+      - "8085:8085"
   my-prometheus:
     image: prom/prometheus
     container_name: my-prometheus
