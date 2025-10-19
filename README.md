@@ -44,10 +44,6 @@ This project is designed for developers and DevOps engineers looking to understa
 
 ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 
-**Database:**
-
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
-
 **DevOps:**
 
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
@@ -58,6 +54,14 @@ This project is designed for developers and DevOps engineers looking to understa
 
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-222222?style=for-the-badge&logo=githubactions&logoColor=white)
 
+![Grafana](https://img.shields.io/badge/Monitoring-Grafana-F46800?logo=grafana&logoColor=white)
+
+![Prometheus](https://img.shields.io/badge/Metrics-Prometheus-E6522C?logo=prometheus&logoColor=white)
+
+![Loki](https://img.shields.io/badge/Logs-Loki-4C8BF5?logo=grafana&logoColor=white)
+
+![Tempo](https://img.shields.io/badge/Traces-Tempo-7E52C1?logo=grafana&logoColor=white)
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -65,7 +69,7 @@ To run this project, you need the following installed on your machine:
 -   **Docker Engine** (version 20.10+): For containerizing applications.
 -   **Docker Compose** (version 2.0+): For orchestrating multi-container Docker applications.
 -   **Terraform CLI** (version 1.0+): For provisioning and managing cloud infrastructure.
--   **Java Development Kit (JDK)** (version 17 or higher): Required for local development of the Spring Boot backend.
+-   **Java Development Kit (JDK)** (version 21 or higher): Required for local development of the Spring Boot backend.
 -   **Apache Maven** (version 3.6+): For building the Spring Boot application locally.
 
 ### Installation
